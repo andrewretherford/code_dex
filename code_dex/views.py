@@ -3,4 +3,4 @@ from django.views.generic.base import TemplateView
 
 # Create your views here.
 class Landing(TemplateView):
-   template_name = 'code_dex/testchild.html'
+   template_name = 'code_dex/landing.html'
