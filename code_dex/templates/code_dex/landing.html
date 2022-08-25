@@ -1,12 +1,12 @@
-{% extends 'code_dex/test.html' %}
+{% extends 'code_dex/index.html' %}
 {% load static %}
 {% block content %}
-<div class="container">
-   <div class="row">
-      <img class="responsive-img auryn" src="{% static 'code_dex/assets/auryn.png' %}" alt="">
+<div class="landing">
+   <div>
+      <img class="auryn" src="{% static 'code_dex/assets/auryn.png' %}" alt="the auryn" width="280" height="280">
    </div>
-   <div class="row">
-      <h3 class="center-align"><a class="enter" href="home">ENTER</a></h3>
+   <div>
+      <h1><a class="enter mt-2" href="home">ENTER</a></h1>
    </div>
 </div>
 {% endblock %}
