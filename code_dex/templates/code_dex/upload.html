@@ -1,0 +1,10 @@
+{% extends 'code_dex/base.html' %}
+
+{% block main %}
+{% include 'code_dex/navbar.html' %}
+   <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-promary">Upload</button>
+   </form>
+{% endblock %}

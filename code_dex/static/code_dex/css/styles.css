@@ -12,16 +12,23 @@ body {
 }
 
 .page-container {
-   background-image: url('../assets/faded_paper.png');
-   background-repeat: no-repeat;
+   background-color: white;
    font-family: 'Oldenburg', cursive;
    max-width: 1920px;
    margin: 0 auto;
+   height: 100vh;
+   overflow: hidden;
+}
+
+main {
+   margin-top: 55px;
 }
 
 /* --------------------- LANDING PAGE --------------------- */
 
 .landing {
+   background-image: url('../assets/faded_paper.png');
+   background-repeat: no-repeat;
    display: grid;
    grid-template-rows: repeat(6, 1fr);
    grid-template-columns: 1fr;
@@ -47,4 +54,21 @@ body {
 
 .enter:hover {
    color: rgb(194, 174, 97);
+}
+
+/* --------------------- NAVBAR --------------------- */
+
+.navbar {
+   background-image: url('../assets/faded_paper.png');
+   background-size: cover;
+   background-repeat: no-repeat;
+   max-width: 1920px;
+   margin: 0 auto;
+}
+
+/* --------------------- RECORDS VIEW --------------------- */
+
+.file-view {
+   overflow: auto;
+   height: 1200px;
 }

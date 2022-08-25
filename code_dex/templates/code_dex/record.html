@@ -1,0 +1,21 @@
+{% extends 'code_dex/base.html' %}
+
+{% block main %}
+{% include 'code_dex/navbar.html' %}
+
+   <div class="file-view">
+      {% for object in object_list %}
+         <p>{{ object.title }}</p>
+         <p>{{ object.category }}</p>
+         {% if '.pdf' in object.file.url  %}
+            <embed src="{{ object.file.url }}" width="800px" height="1080px"/>
+         {% elif '.png' in object.file.url %}
+            <img src="{{ object.file.url }}" alt="{{ object.title }}">
+         {% endif %}
+            
+         {% empty  %}
+         <p>No records found</p>
+      {% endfor %}
+   </div>
+
+{% endblock %}
