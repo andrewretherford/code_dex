@@ -1,7 +1,6 @@
 {% extends 'code_dex/base.html' %}
 
 {% block main %}
-{% include 'code_dex/navbar.html' %}
 
    <div class="file-view">
       {% for object in object_list %}
@@ -12,8 +11,7 @@
          {% elif '.png' in object.file.url %}
             <img src="{{ object.file.url }}" alt="{{ object.title }}">
          {% endif %}
-            
-         {% empty  %}
+         {% empty %}
          <p>No records found</p>
       {% endfor %}
    </div>
