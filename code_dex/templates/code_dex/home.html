@@ -1,5 +1,20 @@
-{% extends 'code_dex/base.html' %}
+{% extends 'base.html' %}
 
 {% block main %}
-   <p>home</p>
+
+<div class="home">
+
+   <form method="get">
+      <select name="category" id="categorySelect" onchange="form.submit()">
+         <option disabled selected>Select Category</option>
+         <option value="all">All Categories</option>
+         {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+         {% endfor %}
+      </select>
+   </form>
+   
+
+</div>
+
 {% endblock %}

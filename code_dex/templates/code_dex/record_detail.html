@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="file-view">
+   <p>{{ object.title }}</p>
+   <p>{{ object.category }}</p>
+   {% if '.pdf' in object.file.url  %}
+      <embed src="{{ object.file.url }}" width="800px" height="1080px"/>
+   {% elif '.png' in object.file.url %}
+      <img src="{{ object.file.url }}" alt="{{ object.title }}">
+   {% endif %}
+</div>
+
+{% endblock %}
+   

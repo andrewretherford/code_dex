@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+import django_on_heroku
+from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -120,8 +121,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# STATIC_URL = '/static/'
-
 # AWS config
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
@@ -151,7 +150,10 @@ DEFAULT_FILE_STORAGE = 'code_dex.storage_backends.MediaStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Allow embedding for pdf display
 X_FRAME_OPTIONS = 'ALLOW-FROM=code-dex.s3.amazonaws.com'
 
-import django_on_heroku
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+
 django_on_heroku.settings(locals())
