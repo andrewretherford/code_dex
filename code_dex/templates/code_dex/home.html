@@ -15,15 +15,31 @@
          {% endfor %}
       </select>
    </form>
+   <!-- a.button -->
 
    <div class="file-view">
       <h1>{{ header }}</h1>
       {% for record in records %}
          <p>{{ record.title }}</p>
          <p>{{ record.category }}</p>
+
+         <a class="btn btn-secondary d-block" 
+         {% if request.GET.category %}
+            href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
+         {% else %}
+            href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}"
+         {% endif %}
+         >edit</a>
+         <a class="btn btn-secondary d-block" 
+         {% if request.GET.category %}
+            href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
+         {% else %}
+            href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}"
+         {% endif %}
+         >delete</a>
          {% if '.pdf' in record.file.url  %}
             <embed src="{{ record.file.url }}" width="800px" height="1080px"/>
-         {% elif '.png' in record.file.url %}
+         {% elif '.png' or '.jpg' in record.file.url %}
             <img src="{{ record.file.url }}" alt="{{ record.title }}">
          {% endif %}
          {% empty %}

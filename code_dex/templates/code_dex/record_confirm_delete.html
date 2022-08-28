@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block main %}
+   
+<h1>Are you sure you want to delete {{ record.title }}?</h1>
+<form method="post">
+   {% csrf_token %}
+   <input type="hidden" name="next" 
+      {% if request.GET.category %}
+         value="{{ request.GET.next }}?category={{ request.GET.category }}" 
+      {% else %}  
+         value="{{ request.GET.next }}" 
+      {% endif %}
+   >
+   <input class="btn btn-danger" type="submit" value="Confirm">
+   <a 
+      {% if request.GET.category %}
+         href="{{ request.GET.next }}?category={{ request.GET.category }}" 
+      {% else %}  
+         href="{{ request.GET.next }}" 
+      {% endif %}
+      class="btn btn-secondary"
+   >Cancel</a>
+</form>
+
+{% endblock main %}
+   

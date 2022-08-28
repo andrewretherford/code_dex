@@ -1,9 +1,13 @@
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, RedirectView, View
+from ast import Del
+from urllib import request
+from winreg import DeleteValue
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
+from django.dispatch import receiver
 
 from .models import *
 from .forms import UploadForm
@@ -50,6 +54,25 @@ class RecordsList(ListView):
 
 class RecordDetail(DetailView):
    model = Record
+
+class RecordUpdate(UpdateView):
+   model = Record
+   fields = ['title', 'category']
+
+   def get_success_url(self):
+      next = self.request.POST.get('next', '/')
+      return next
+
+class RecordDelete(DeleteView):
+   model = Record
+
+   @receiver(models.signals.post_delete, sender=Record)
+   def delete_from_s3(sender, instance, using, **kwargs):
+      instance.file.delete(save=False)
+
+   def get_success_url(self):
+      next = self.request.POST.get('next', '/')
+      return next
 
 class Settings(TemplateView):
    template_name = 'code_dex/settings.html'
