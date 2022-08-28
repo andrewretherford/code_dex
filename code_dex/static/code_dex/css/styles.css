@@ -26,16 +26,16 @@ main {
 
 /* --------------------- LANDING PAGE --------------------- */
 
-.landing {
+.landing, .login-signup {
    background-image: url('../assets/faded_paper.png');
    background-repeat: no-repeat;
+   background-size: auto;
    display: grid;
    grid-template-rows: repeat(6, 1fr);
    grid-template-columns: 1fr;
    row-gap: 20px;
    align-items: center;
    justify-items: center;
-   width: 100%;
 }
 
 .landing > :first-child {
@@ -46,13 +46,21 @@ main {
    grid-row: 3/4;
 }
 
-.enter {
+.login-signup {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   max-width: 1920px;
+   min-height: 100vh;
+}
+
+.gold-link {
    color: rgb(145, 130, 70);
    text-decoration: none;
    font-size: 1.2em;
 }
 
-.enter:hover {
+.gold-link:hover {
    color: rgb(194, 174, 97);
 }
 
@@ -64,6 +72,12 @@ main {
    background-repeat: no-repeat;
    max-width: 1920px;
    margin: 0 auto;
+}
+
+/* --------------------- LOGIN/SIGNUP --------------------- */
+
+.login-signup {
+   background-image: url('../assets/faded_paper.png');
 }
 
 /* --------------------- RECORDS VIEW --------------------- */
