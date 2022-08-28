@@ -21,7 +21,7 @@ class Home(TemplateView):
 
    def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
-      context['categories'] = Category.objects.all()
+      context['categories'] = Category.objects.filter(owner=self.request.user)
       category = self.request.GET.get('category')
       if category != None and category != 'all':
          context['records'] = Record.objects.filter(category=category, owner=self.request.user)
@@ -31,10 +31,43 @@ class Home(TemplateView):
          context['header'] = 'All Records'
       return context
 
+class Categories(TemplateView):
+   template_name = 'code_dex/categories.html'
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context['categories'] = Category.objects.filter(owner=self.request.user)
+      return context
+
+class CreateCategory(CreateView):
+   model = Category
+   fields = ['name']
+
+   def form_valid(self, form):
+      form.instance.owner = self.request.user
+      return super(CreateCategory, self).form_valid(form)
+
+   def get_success_url(self):
+      return reverse('home')
+
+class CategoryUpdate(UpdateView):
+   model = Category
+   fields = ['name']
+   success_url = '/home'
+
+class CategoryDelete(DeleteView):
+   model = Category
+   success_url = '/categories'
+
 class Upload(CreateView):
    model = Record
    fields = ['title', 'category', 'file']
    template_name = 'code_dex/upload.html'
+
+   def get_form(self, *args, **kwargs):
+      form = super().get_form(*args, **kwargs)
+      form.fields['category'].queryset = Category.objects.filter(owner=self.request.user)
+      return form
 
    def form_valid(self, form):
       form.instance.owner = self.request.user
@@ -43,21 +76,17 @@ class Upload(CreateView):
    def get_success_url(self):
       return reverse('record_detail', kwargs={'pk': self.object.pk})
 
-class RecordsList(ListView):
-   model = Record
-
-   def get_context_data(self, **kwargs):
-      context = super().get_context_data(**kwargs)
-      category = self.request.GET.get('category')
-      print(category)
-
-
 class RecordDetail(DetailView):
    model = Record
 
 class RecordUpdate(UpdateView):
    model = Record
    fields = ['title', 'category']
+
+   def get_form(self, *args, **kwargs):
+      form = super().get_form(*args, **kwargs)
+      form.fields['category'].queryset = Category.objects.filter(owner=self.request.user)
+      return form
 
    def get_success_url(self):
       next = self.request.POST.get('next', '/')

@@ -5,6 +5,7 @@ from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 class Category(models.Model):
+   owner = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, related_name='category_owner')
    name = models.CharField(null=False, blank=False, max_length=50)
 
    def __str__(self):
