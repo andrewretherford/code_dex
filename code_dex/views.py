@@ -1,11 +1,11 @@
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, View
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, RedirectView, View
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 
-from .models import Record
+from .models import *
 from .forms import UploadForm
 
 # Create your views here.
@@ -15,14 +15,22 @@ class Landing(TemplateView):
 class Home(TemplateView):
    template_name = 'code_dex/home.html'
 
-   def get_categories(self, **kwargs):
-      pass
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context['categories'] = Category.objects.all()
+      category = self.request.GET.get('category')
+      if category != None and category != 'all':
+         context['records'] = Record.objects.filter(category=category, owner=self.request.user)
+         context['header'] = Category.objects.get(id=category)
+      else:
+         context['records'] = Record.objects.filter(owner=self.request.user)
+         context['header'] = 'All Records'
+      return context
 
 class Upload(CreateView):
    model = Record
    fields = ['title', 'category', 'file']
    template_name = 'code_dex/upload.html'
-   # success_url = reverse_lazy('records_list')
 
    def form_valid(self, form):
       form.instance.owner = self.request.user
@@ -33,6 +41,12 @@ class Upload(CreateView):
 
 class RecordsList(ListView):
    model = Record
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      category = self.request.GET.get('category')
+      print(category)
+
 
 class RecordDetail(DetailView):
    model = Record

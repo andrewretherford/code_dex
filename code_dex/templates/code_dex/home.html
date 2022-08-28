@@ -3,7 +3,9 @@
 {% block main %}
 
 <div class="home">
+   <script type="">
 
+   </script>
    <form method="get">
       <select name="category" id="categorySelect" onchange="form.submit()">
          <option disabled selected>Select Category</option>
@@ -13,7 +15,21 @@
          {% endfor %}
       </select>
    </form>
-   
+
+   <div class="file-view">
+      <h1>{{ header }}</h1>
+      {% for record in records %}
+         <p>{{ record.title }}</p>
+         <p>{{ record.category }}</p>
+         {% if '.pdf' in record.file.url  %}
+            <embed src="{{ record.file.url }}" width="800px" height="1080px"/>
+         {% elif '.png' in record.file.url %}
+            <img src="{{ record.file.url }}" alt="{{ record.title }}">
+         {% endif %}
+         {% empty %}
+         <p>No records found</p>
+      {% endfor %}
+   </div>
 
 </div>
 

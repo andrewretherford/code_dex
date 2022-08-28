@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.models import inlineformset_factory
 from .models import *
 
 class UploadForm(forms.ModelForm):
@@ -6,7 +7,4 @@ class UploadForm(forms.ModelForm):
       model = Record
       fields = ('title', 'category', 'file')
 
-class CategoryForm(forms.ModelForm):
-   class Meta:
-      model = Category
-      fields = '__all__'
+# RecordsCategoryFormset = inlineformset_factory(Category, Record, fields=(''))
