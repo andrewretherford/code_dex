@@ -14,7 +14,7 @@ class Category(models.Model):
 class Record(models.Model):
    owner = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, related_name='record_owner')
    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-   title = models.CharField(max_length=50, default='New Note')
+   title = models.CharField(max_length=50)
    file = models.FileField(validators=[
       FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'ppt', 'xlsx', 'png', 'jpg'])
    ])
