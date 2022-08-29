@@ -3,52 +3,52 @@
 {% block main %}
 
 <div class="home">
-   <script type="">
-
-   </script>
-   <form method="get">
-      <select name="category" id="categorySelect" onchange="form.submit()">
-         <option disabled selected>Select Category</option>
-         <option value="all">All Categories</option>
-         {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.name }}</option>
-         {% endfor %}
-         </select>
-      </form>
-      <a class="btn btn-secondary" href="{% url 'category_create' %}">Add Category</a>
-      <a class="btn btn-secondary" href="{% url 'categories' %}?">Edit</a>
-
-   <div class="file-view">
-      <h1>{{ header }}</h1>
-      {% for record in records %}
-         <p>{{ record.title }}</p>
-         <p>{{ record.category }}</p>
-         {% if '.pdf' in record.file.url  %}
-            <embed src="{{ record.file.url }}" width="800px" height="1080px"/>
-         {% elif '.png' or '.jpg' in record.file.url %}
-            <img src="{{ record.file.url }}" alt="{{ record.title }}">
-         {% endif %}
-         <div>
-            <a class="btn btn-secondary d-inline-block"
-               {% if request.GET.category %}
-                  href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
-               {% else %}
-                  href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}"
-               {% endif %}
-            ><i class="bi bi-pencil"></i></a>
-            <a class="btn btn-secondary d-inline-block"
-               {% if request.GET.category %}
-                  href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
-               {% else %}
-                  href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}"
-               {% endif %}
-            ><i class="bi bi-trash3"></i></a>
-         </div>
-         {% empty %}
-         <p>No records found</p>
-      {% endfor %}
+   <div class="container">
+      <form method="get">
+         <select name="category" id="categorySelect" onchange="form.submit()">
+            <option disabled selected>Select Category</option>
+            <option value="all">All Categories</option>
+            {% for category in categories %}
+               <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+            </select>
+         </form>
+         <a class="btn btn-secondary" href="{% url 'category_create' %}">Add Category</a>
+         <a class="btn btn-secondary" href="{% url 'categories' %}?">Edit</a>
    </div>
 
+   <div class="file-view">
+      <div class="container">
+         <h1>{{ header }}</h1>
+         {% for record in records %}
+            <p>{{ record.title }}</p>
+            <p>{{ record.category }}</p>
+            {% if '.pdf' in record.file.url  %}
+               <embed src="{{ record.file.url }}" width="800px" height="1080px"/>
+            {% elif '.png' or '.jpg' in record.file.url %}
+               <img src="{{ record.file.url }}" alt="{{ record.title }}">
+            {% endif %}
+            <div>
+               <a class="btn btn-secondary d-inline-block"
+                  {% if request.GET.category %}
+                     href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
+                  {% else %}
+                     href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}"
+                  {% endif %}
+               ><i class="bi bi-pencil"></i></a>
+               <a class="btn btn-secondary d-inline-block"
+                  {% if request.GET.category %}
+                     href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
+                  {% else %}
+                     href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}"
+                  {% endif %}
+               ><i class="bi bi-trash3"></i></a>
+            </div>
+            {% empty %}
+            <p>No records found</p>
+         {% endfor %}
+      </div>
+   </div>
 </div>
 
 {% endblock %}

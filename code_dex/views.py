@@ -103,15 +103,14 @@ class RecordDelete(DeleteView):
       next = self.request.POST.get('next', '/')
       return next
 
-class Settings(TemplateView):
-   template_name = 'code_dex/settings.html'
+class ProfileEdit(UpdateView):
+   model = User
+   fields = ['username', 'email']
+   template_name = 'code_dex/profile.html'
+   success_url = '/home'
 
-class Login(LoginView):
-   template_name = 'registration/login.html'
-
-class Logout(LogoutView):
-   template_name = 'registration/logout.html'
-   next_page = None
+   def form_valid(self, form):
+      return super().form_valid(form)
 
 class Signup(View):
    def get(self, request):

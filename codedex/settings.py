@@ -35,13 +35,13 @@ ALLOWED_HOSTS = ['codedex.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'code_dex',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'code_dex',
     'storages',
 ]
 
