@@ -6,19 +6,48 @@
    <div class="container-fluid d-flex justify-content-between">
       <a href="/home" class="navbar-brand">CODE_DEX</a>
       <div class="order-1 order-md-0">
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+         <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarMenu" 
+            aria-controls="navbarMenu" 
+            aria-expanded="false" a
+            ria-label="Toggle navigation"
+         >
             <span class="navbar-toggler-icon"></span>
          </button>
-         <div class="collapse navbar-collapse menu me-5 sm-me-0" id="navbarMenu">
+         <div class="collapse navbar-collapse me-5 sm-me-0" id="navbarMenu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <a 
+                  class="nav-link dropdown-toggle" 
+                  href="#" 
+                  role="button" 
+                  data-bs-toggle="dropdown" 
+                  aria-expanded="false"
+               >
                   <i class="bi bi-person-circle"></i>
                </a>
                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'profile_edit' request.user.id %}">Edit Profile</a></li>
-                  <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
-                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                  <li><a 
+                     class="dropdown-item" 
+                     href="{% url 'profile_edit' request.user.id %}"
+                  >
+                     Edit Profile
+                  </a></li>
+                  <li><a 
+                     class="dropdown-item" 
+                     href="{% url 'password_change' %}"
+                  >
+                     Change Password
+                  </a></li>
+                  <li><a 
+                     class="dropdown-item" 
+                     href="{% url 'logout' %}"
+                  >
+                     Logout
+                  </a></li>
                </ul>
                <li class="nav-item">
                   <a href="/upload" class="nav-link active" aria-current="home">UPLOAD</a>
@@ -28,10 +57,12 @@
          </div>
       </div>
 
-      {% block categories %}{% endblock %}
       
    </div>
- </nav>
+   <div class="col">
+      {% block categories %}{% endblock %}
+   </div>
+</nav>
  
 <main>
 {% block main %}{% endblock %}  
