@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 
+{% with categories as categories %}
+   {% include 'code_dex/navbar.html' %}
+{% endwith %}
+
 {% block main %}
 
 <div class="home">
-   <div class="container">
+   <!-- <div class="container">
       <form method="get">
          <select name="category" id="categorySelect" onchange="form.submit()">
             <option disabled selected>Select Category</option>
@@ -15,7 +19,7 @@
          </form>
          <a class="btn btn-secondary" href="{% url 'category_create' %}">Add Category</a>
          <a class="btn btn-secondary" href="{% url 'categories' %}?">Edit</a>
-   </div>
+   </div> -->
 
    <div class="file-view">
       <div class="container">

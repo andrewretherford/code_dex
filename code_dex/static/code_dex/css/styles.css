@@ -66,6 +66,15 @@ main {
    margin: 0 auto;
 }
 
+.cat-select {
+   display: flex;
+}
+
+.cat-select > a {
+   color: black;
+   margin: 0 15px;
+}
+
 /* --------------------- LOGIN/SIGNUP --------------------- */
 
 .login-signup {
@@ -104,3 +113,5 @@ main {
    overflow: auto;
    height: 1200px;
 }
+
+/* --------------------- RECORDS VIEW --------------------- */
