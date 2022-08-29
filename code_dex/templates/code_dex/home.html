@@ -1,28 +1,18 @@
 {% extends 'base.html' %}
 
-{% with categories as categories %}
-   {% include 'code_dex/navbar.html' %}
-{% endwith %}
+
+{% block categories %}
+   {% with categories as categories %}
+      {% include 'code_dex/navbar-categories.html' %}
+   {% endwith %}
+{% endblock categories %}
+   
 
 {% block main %}
 
 <div class="home">
-   <!-- <div class="container">
-      <form method="get">
-         <select name="category" id="categorySelect" onchange="form.submit()">
-            <option disabled selected>Select Category</option>
-            <option value="all">All Categories</option>
-            {% for category in categories %}
-               <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-            </select>
-         </form>
-         <a class="btn btn-secondary" href="{% url 'category_create' %}">Add Category</a>
-         <a class="btn btn-secondary" href="{% url 'categories' %}?">Edit</a>
-   </div> -->
-
    <div class="file-view">
-      <div class="container">
+      <div class="display-window">
          <h1>{{ header }}</h1>
          {% for record in records %}
             <p>{{ record.title }}</p>
