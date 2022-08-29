@@ -6,5 +6,3 @@ class UploadForm(forms.ModelForm):
    class Meta:
       model = Record
       fields = ('title', 'category', 'file')
-
-# RecordsCategoryFormset = inlineformset_factory(Category, Record, fields=(''))

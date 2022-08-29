@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+   
+<div>
+   {% for category in categories %}
+      <div>
+         <span>{{ category.name }}</span>
+         <a class="btn btn-secondary" href="{% url 'category_update' category.pk %}?"><i class="bi bi-pencil"></i></a>
+         <a class="btn btn-secondary" href="{% url 'category_delete' category.pk %}?"><i class="bi bi-trash3"></i></a>
+      </div>
+   {% endfor %}
+   <a href="/home" class="btn btn-secondary">Back to Home</a>
+</div>
+
+{% endblock main %}
+   

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="auth-page">
+   <div>
+      <h1 class="mb-5">Edit User Info</h1>
+      <form method="post">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <input class="btn btn-secondary" type="submit" value="Save">
+      </form>
+   </div>
+</div>
+
+{% endblock %}

@@ -1,9 +1,13 @@
-from django.views.generic import TemplateView, CreateView, ListView, DetailView, RedirectView, View
+from ast import Del
+from urllib import request
+from winreg import DeleteValue
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
+from django.dispatch import receiver
 
 from .models import *
 from .forms import UploadForm
@@ -17,7 +21,7 @@ class Home(TemplateView):
 
    def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
-      context['categories'] = Category.objects.all()
+      context['categories'] = Category.objects.filter(owner=self.request.user)
       category = self.request.GET.get('category')
       if category != None and category != 'all':
          context['records'] = Record.objects.filter(category=category, owner=self.request.user)
@@ -27,10 +31,43 @@ class Home(TemplateView):
          context['header'] = 'All Records'
       return context
 
+class Categories(TemplateView):
+   template_name = 'code_dex/categories.html'
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context['categories'] = Category.objects.filter(owner=self.request.user)
+      return context
+
+class CreateCategory(CreateView):
+   model = Category
+   fields = ['name']
+
+   def form_valid(self, form):
+      form.instance.owner = self.request.user
+      return super(CreateCategory, self).form_valid(form)
+
+   def get_success_url(self):
+      return reverse('home')
+
+class CategoryUpdate(UpdateView):
+   model = Category
+   fields = ['name']
+   success_url = '/home'
+
+class CategoryDelete(DeleteView):
+   model = Category
+   success_url = '/categories'
+
 class Upload(CreateView):
    model = Record
    fields = ['title', 'category', 'file']
    template_name = 'code_dex/upload.html'
+
+   def get_form(self, *args, **kwargs):
+      form = super().get_form(*args, **kwargs)
+      form.fields['category'].queryset = Category.objects.filter(owner=self.request.user)
+      return form
 
    def form_valid(self, form):
       form.instance.owner = self.request.user
@@ -39,27 +76,41 @@ class Upload(CreateView):
    def get_success_url(self):
       return reverse('record_detail', kwargs={'pk': self.object.pk})
 
-class RecordsList(ListView):
-   model = Record
-
-   def get_context_data(self, **kwargs):
-      context = super().get_context_data(**kwargs)
-      category = self.request.GET.get('category')
-      print(category)
-
-
 class RecordDetail(DetailView):
    model = Record
 
-class Settings(TemplateView):
-   template_name = 'code_dex/settings.html'
+class RecordUpdate(UpdateView):
+   model = Record
+   fields = ['title', 'category']
 
-class Login(LoginView):
-   template_name = 'registration/login.html'
+   def get_form(self, *args, **kwargs):
+      form = super().get_form(*args, **kwargs)
+      form.fields['category'].queryset = Category.objects.filter(owner=self.request.user)
+      return form
 
-class Logout(LogoutView):
-   template_name = 'registration/logout.html'
-   next_page = None
+   def get_success_url(self):
+      next = self.request.POST.get('next', '/')
+      return next
+
+class RecordDelete(DeleteView):
+   model = Record
+
+   @receiver(models.signals.post_delete, sender=Record)
+   def delete_from_s3(sender, instance, using, **kwargs):
+      instance.file.delete(save=False)
+
+   def get_success_url(self):
+      next = self.request.POST.get('next', '/')
+      return next
+
+class ProfileEdit(UpdateView):
+   model = User
+   fields = ['username', 'email']
+   template_name = 'code_dex/profile.html'
+   success_url = '/home'
+
+   def form_valid(self, form):
+      return super().form_valid(form)
 
 class Signup(View):
    def get(self, request):
