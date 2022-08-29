@@ -78,7 +78,7 @@ main {
 }
 
 .auth-page {
-   background-color: rgb(210, 200, 165);
+   background-color: rgb(230, 220, 185);
    display: grid;
    grid-template-rows: repeat(6, 1fr);
    grid-template-columns: 1fr;
