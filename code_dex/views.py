@@ -43,10 +43,10 @@ class Home(TemplateView):
 
    def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
-      context['categories'] = Category.objects.filter(owner=self.request.user)
+      context['categories'] = Category.objects.filter(owner=self.request.user).order_by('name')
       category = self.request.GET.get('category')
       if category != None and category != 'all':
-         context['records'] = Record.objects.filter(category=category, owner=self.request.user)
+         context['records'] = Record.objects.filter(category=category, owner=self.request.user).order_by('title')
          context['header'] = Category.objects.get(id=category)
       else:
          context['records'] = Record.objects.filter(owner=self.request.user)
