@@ -8,6 +8,8 @@
    --pageBackground: rgb(230, 220, 185);
    --goldLink: rgb(145, 130, 70);
    --goldLinkHover: rgb(194, 174, 97);
+   --button: rgb(240, 225, 145);
+   --buttonHover: rgb(220, 205, 125);
 }
 
 html, body {
@@ -38,8 +40,6 @@ footer {
    background-image: url('../assets/faded_paper.png');
    background-size: cover;
    background-repeat: no-repeat;
-   /* position: absolute;
-   bottom: 0; */
    height: 20px;
    width: 100%;
    max-width: 1920px;
@@ -78,6 +78,16 @@ footer {
    color: var(--goldLinkHover);
 }
 
+.btn-secondary {
+   background-color: var(--button);
+   color: black;
+}
+
+.btn-secondary:hover {
+   background-color: var(--buttonHover);
+   color: black;
+}
+
 /* ----------------------- NAVBAR ----------------------- */
 
 .navbar {
@@ -95,6 +105,8 @@ footer {
 .cat-select > a {
    color: black;
    margin-left: 15px;
+   margin-top: 3px;
+   font-size: small;
 }
 
 .cat-select > a:hover {
@@ -167,7 +179,8 @@ hr {
    justify-content: center;
    align-items: center;
    max-width: 1920px;
-   min-height: 100vh;
+   height: 100%;
+   min-height: 91.9vh;
 }
 
 .info-page > div {

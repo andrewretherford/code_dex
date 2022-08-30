@@ -8,7 +8,9 @@
       <form method="post">
          {% csrf_token %}
          {{ form.as_p }}
-         <input class="btn btn-secondary" type="submit" value="Save">
+         <div class="d-flex justify-content-center">
+            <input class="btn btn-secondary mt-3" type="submit" value="Save">
+         </div>
       </form>
    </div>
 </div>

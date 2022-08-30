@@ -3,7 +3,7 @@
    
 <div class="info-page">
    <div>
-      <h1>Are you sure you want to delete {{ category.title }}?</h1>
+      <h1 class="mb-5">Are you sure you want to delete {{ category.title }}?</h1>
       <form method="post">
          {% csrf_token %}
          <!-- <input type="hidden" name="next" value="{{ request.GET.next }}"> -->

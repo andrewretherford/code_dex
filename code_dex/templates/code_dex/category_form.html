@@ -4,10 +4,13 @@
 
 <div class="info-page">
    <div>
+      <h1 class="mb-5">Category Name</h1>
       <form method="post">
          {% csrf_token %}
          {{ form.as_p }}
-         <input class="btn btn-secondary" type="submit" value="Save">
+         <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary mt-3">Save</button>
+         </div>
       </form>
    </div>
 </div>
