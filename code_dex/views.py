@@ -49,7 +49,7 @@ class CreateCategory(CreateView):
 class CategoryUpdate(UpdateView):
    model = Category
    fields = ['name']
-   success_url = '/home'
+   success_url = '/categories'
 
 class CategoryDelete(DeleteView):
    model = Category

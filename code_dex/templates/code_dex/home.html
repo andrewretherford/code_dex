@@ -18,7 +18,13 @@
             <h4>{{ record.title }}</h4>
             <h6>{{ record.category }}</h6>
             {% if '.pdf' in record.file.url  %}
-               <object class="pdf" data="{{ record.file.url }}" type="application/pdf"></object>
+               <object class="file" data="{{ record.file.url }}" type="application/pdf"></object>
+            {% elif '.doc' in record.file.url %}
+               <object class="file" data="{{ record.file.url }}" type="application/msword"></object>
+            {% elif '.xlsx' in record.file.url %}
+               <object class="file" data="{{ record.file.url }}" type="application/msword"></object>
+            {% elif '.ppt' in record.file.url %}
+               <object class="file" data="{{ record.file.url }}" type="application/msword"></object>
             {% elif '.png' in record.file.url %}
                <object class="image" data="{{ record.file.url }}" type="image/png"></object>
             {% elif '.jpg' in record.file.url %}
@@ -26,7 +32,7 @@
             {% endif %}
             <div>
                <h5 class="d-inline-block me-3 mt-3 mb-5">
-                  <a class="edit delete"
+                  <a class="edit"
                      {% if request.GET.category %}
                         href="{% url 'record_update' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
                      {% else %}
@@ -35,7 +41,7 @@
                   ><i class="bi bi-pencil-fill"></i></a>
                </h5>
                <h5 class="d-inline-block ms-2 mt-3 mb-5">
-                  <a class="edit delete"
+                  <a class="delete"
                      {% if request.GET.category %}
                         href="{% url 'record_delete' record.pk %}?next={{ request.path|urlencode }}&category={{ request.GET.category }}"
                      {% else %}

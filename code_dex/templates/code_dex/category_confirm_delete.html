@@ -3,10 +3,9 @@
    
 <div class="info-page">
    <div>
-      <h1 class="mb-5">Are you sure you want to delete {{ category.title }}?</h1>
+      <h1 class="mb-5">Are you sure you want to delete {{ category.name }}?</h1>
       <form method="post">
          {% csrf_token %}
-         <!-- <input type="hidden" name="next" value="{{ request.GET.next }}"> -->
          <input class="btn btn-danger" type="submit" value="Confirm">
          <a href="/categories" class="btn btn-secondary">Cancel</a>
       </form>

@@ -158,7 +158,7 @@ hr {
 
  /* File Displays */
 
- .pdf {
+.file {
    min-height: 100vh;
    width: 80%;
  }

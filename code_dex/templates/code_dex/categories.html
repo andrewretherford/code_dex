@@ -9,8 +9,8 @@
       {% for category in categories %}
          <div>
             <span class="d-inline-block mb-2 me-2" style="font-size: 1.2em;">{{ category.name }}</span>
-            <a class="edit delete" href="{% url 'category_update' category.pk %}?"><i class="bi bi-pencil-fill"></i></a>
-            <a class="edit delete" href="{% url 'category_delete' category.pk %}?"><i class="bi bi-trash3-fill"></i></a>
+            <a class="edit delete" href="{% url 'category_update' category.pk %}"><i class="bi bi-pencil-fill"></i></a>
+            <a class="edit delete" href="{% url 'category_delete' category.pk %}"><i class="bi bi-trash3-fill"></i></a>
          </div>
       {% endfor %}
       <a href="/home" class="gold-link mt-5">Back to Home</a>
