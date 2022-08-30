@@ -33,6 +33,8 @@ As a project, this was my initial attempt at a Django full stack application.  T
 - Implement the built in password reset functionality that Django offers via email reset link
 - Build in compatibility for more file types such as all MS Office file extensions and .csv
 - Add modals for all files in the home view that display files at 100% resolution and have a magnifier
+- Add info about the app and basic instructions on homepage that renders only if not logged in
+- Add search function to pull up any records that match search string
 
 ## Planning
 
