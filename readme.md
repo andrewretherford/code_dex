@@ -29,9 +29,11 @@ As a project, this was my initial attempt at a Django full stack application.  T
 - As mentioned above, Django itself is quite dense and it took some time to learn how to do even the basics, like handing context from a link on one page to the destination template for reverse navigation etc.
 
 ### Roadmap
-- I'd like to fully overwrite the default user auth forms to make them more attractive.
-- I would also like to implement the built in password reset functionality that Django offers via email reset link.
-- I would like to build in compatibility for more file types such as all MS Office file extensions and .csv
+- Fully overwrite the default user auth forms to make them more attractive
+- Implement the built in password reset functionality that Django offers via email reset link
+- Build in compatibility for more file types such as all MS Office file extensions and .csv
+- Add modals for all files in the home view that display files at 100% resolution and have a magnifier
+- Alphabetize categories and files when displaying in frontend
 
 ## Planning
 
