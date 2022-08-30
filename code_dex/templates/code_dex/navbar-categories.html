@@ -1,0 +1,13 @@
+<div class="cat-select">
+   <form method="get">
+      <select class="d-inline" name="category" id="categorySelect" onchange="form.submit()">
+         <option disabled selected>Select Category</option>
+         <option value="all">All Categories</option>
+         {% for category in categories %}
+         <option value="{{ category.id }}">{{ category.name }}</option>
+         {% endfor %}
+      </select>
+   </form>
+   <a href="{% url 'category_create' %}"><i class="bi bi-plus-circle-fill"></i></a>
+   <a href="{% url 'categories' %}?"><i class="bi bi-pencil-fill"></i></a>
+</div>
