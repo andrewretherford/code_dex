@@ -9,9 +9,11 @@
       <h4>{{ object.title }}</h4>
       <h6>{{ object.category }}</h6>
       {% if '.pdf' in object.file.url  %}
-         <embed src="{{ object.file.url }}" width="800px" height="1080px"/>
+         <object class="file" data="{{ object.file.url }}" type="application/pdf"></object>
       {% elif '.png' in object.file.url %}
-         <img src="{{ object.file.url }}" alt="{{ object.title }}">
+         <object class="image" data="{{ object.file.url }}" type="image/png"></object>
+      {% elif '.jpg' in object.file.url %}
+         <object class="image" data="{{ object.file.url }}" type="image/jpg"></object>
       {% endif %}
       <a class="gold-link mt-5" href="/home">Return to Homepage</a>
    </div>
