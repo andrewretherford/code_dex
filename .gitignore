@@ -1,6 +1,7 @@
 .env
 .vscode
 node_modules
+staticfiles
 code_dex/__pycache__
 code_dex/migrations
 codedex/__pycache__
