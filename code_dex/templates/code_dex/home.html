@@ -19,12 +19,6 @@
             <h6>{{ record.category }}</h6>
             {% if '.pdf' in record.file.url  %}
                <object class="file" data="{{ record.file.url }}" type="application/pdf"></object>
-            {% elif '.doc' in record.file.url %}
-               <object class="file" data="{{ record.file.url }}" type="application/msword"></object>
-            {% elif '.xlsx' in record.file.url %}
-               <object class="file" data="{{ record.file.url }}" type="application/msword"></object>
-            {% elif '.ppt' in record.file.url %}
-               <object class="file" data="{{ record.file.url }}" type="application/msword"></object>
             {% elif '.png' in record.file.url %}
                <object class="image" data="{{ record.file.url }}" type="image/png"></object>
             {% elif '.jpg' in record.file.url %}

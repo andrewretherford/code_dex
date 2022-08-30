@@ -16,7 +16,7 @@ class Record(models.Model):
    category = models.ForeignKey(Category, on_delete=models.CASCADE)
    title = models.CharField(max_length=50)
    file = models.FileField(validators=[
-      FileExtensionValidator(allowed_extensions=['pdf', 'xlsx', 'png', 'jpg'])
+      FileExtensionValidator(allowed_extensions=['pdf', 'png', 'jpg'])
    ])
 
    def __str__(self):
