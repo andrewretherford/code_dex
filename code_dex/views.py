@@ -1,10 +1,6 @@
-from ast import Del
-from urllib import request
-from winreg import DeleteValue
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.dispatch import receiver
