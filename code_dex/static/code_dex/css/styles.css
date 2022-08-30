@@ -129,6 +129,7 @@ footer {
 .file-view {
    overflow: auto;
    height: 100%;
+   min-height: 91.9vh;
 }
 
 .file-view > div {

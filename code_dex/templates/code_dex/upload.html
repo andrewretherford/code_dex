@@ -5,7 +5,7 @@
    <div class="info-page">
       <div>
          <h1 class="mb-5">Upload a File</h1>
-         <form method="post" enctype="multipart/form-data">
+         <form method="post" enctype="multipart/form-data" style="width: 80%;">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="d-flex justify-content-center">
