@@ -8,7 +8,33 @@ from django.dispatch import receiver
 from .models import *
 from .forms import UploadForm
 
-# Create your views here.
+# ---------------------------- AUTH VIEWS ----------------------------
+class ProfileEdit(UpdateView):
+   model = User
+   fields = ['username', 'email']
+   template_name = 'code_dex/profile.html'
+   success_url = '/home'
+
+   def form_valid(self, form):
+      return super().form_valid(form)
+
+class Signup(View):
+   def get(self, request):
+      form = UserCreationForm()
+      context = {"form": form}
+      return render(request, 'registration/signup.html', context)
+
+   def post(self, request):
+      form = UserCreationForm(request.POST)
+      if form.is_valid():
+         user = form.save()
+         login(request, user)
+         return redirect('home')
+      else:
+         context = {"form": form}
+         return render(request, 'registration/signup.html', context)
+
+# ---------------------------- PAGE VIEWS ----------------------------
 class Landing(TemplateView):
    template_name = 'code_dex/landing.html'
 
@@ -27,6 +53,7 @@ class Home(TemplateView):
          context['header'] = 'All Records'
       return context
 
+# -------------------------- CATEGORY VIEWS --------------------------
 class Categories(TemplateView):
    template_name = 'code_dex/categories.html'
 
@@ -55,6 +82,7 @@ class CategoryDelete(DeleteView):
    model = Category
    success_url = '/categories'
 
+# --------------------------- RECORD VIEWS ---------------------------
 class Upload(CreateView):
    model = Record
    fields = ['title', 'category', 'file']
@@ -98,28 +126,3 @@ class RecordDelete(DeleteView):
    def get_success_url(self):
       next = self.request.POST.get('next', '/')
       return next
-
-class ProfileEdit(UpdateView):
-   model = User
-   fields = ['username', 'email']
-   template_name = 'code_dex/profile.html'
-   success_url = '/home'
-
-   def form_valid(self, form):
-      return super().form_valid(form)
-
-class Signup(View):
-   def get(self, request):
-      form = UserCreationForm()
-      context = {"form": form}
-      return render(request, 'registration/signup.html', context)
-
-   def post(self, request):
-      form = UserCreationForm(request.POST)
-      if form.is_valid():
-         user = form.save()
-         login(request, user)
-         return redirect('home')
-      else:
-         context = {"form": form}
-         return render(request, 'registration/signup.html', context)
