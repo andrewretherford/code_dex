@@ -5,3 +5,4 @@ staticfiles
 code_dex/__pycache__
 code_dex/migrations
 codedex/__pycache__
+codex.pem
